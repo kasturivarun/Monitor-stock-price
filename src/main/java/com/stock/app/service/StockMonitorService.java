@@ -38,8 +38,8 @@ public class StockMonitorService {
 	public Boolean addSymbol(String symbol) {
 		StockObject stock = new StockObject();
 		stock.setSymbol(symbol);
+		
 		try {
-			
 			Stock stockFromYahoo = YahooFinance.get(symbol);
 			BigDecimal price = stockFromYahoo.getQuote().getPrice();
 			stock.setPrice(price);
@@ -51,6 +51,10 @@ public class StockMonitorService {
 		Boolean result = dao.addSymbol(stock);
 		
 		return result;
+	}
+
+	public Boolean deleteSymbol(String symbol) {
+		return dao.deleteSymbol(symbol);
 	}
 
 }

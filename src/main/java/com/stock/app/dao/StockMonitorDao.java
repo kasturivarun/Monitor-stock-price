@@ -30,10 +30,12 @@ public class StockMonitorDao {
 	
 	private StockRepository stockRepository;
 	
+	
 	public StockObject getSymbol(String symbol){
 		StockObject st = stockRepository.findBySymbol(symbol);
 		return st;
 	}
+
 	
 	
 	@Transactional
@@ -52,5 +54,19 @@ public class StockMonitorDao {
 			return true;			
 		}
 	}
+
+	@Transactional
+	public Boolean deleteSymbol(String symbol) {
+		StockObject st = stockRepository.findBySymbol(symbol);
+		stockRepository.delete(st);
+		st = stockRepository.findBySymbol(symbol);
+		if(st == null){
+			return true;
+		}else{
+			return false;			
+		}
+	}
+	
+	
 	
 }

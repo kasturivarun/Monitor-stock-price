@@ -36,4 +36,10 @@ public class StockMonitorController {
         return service.addSymbol(symbol);
     }
 	
+	@RequestMapping("/deleteCompany")
+    public Boolean deleteSymbol(@RequestParam(value="symbol") String symbol) throws SQLException {
+        return service.deleteSymbol(symbol);
+    }
+	
+	
 }
