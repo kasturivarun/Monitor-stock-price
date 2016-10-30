@@ -20,6 +20,7 @@ import yahoofinance.YahooFinance;
 
 import com.stock.app.dao.StockMonitorDao;
 import com.stock.app.pojo.StockObject;
+import com.stock.app.pojo.StockPriceHistoryObject;
 
 /**
  * @author varun kasturi
@@ -49,12 +50,48 @@ public class StockMonitorService {
 		}
 		
 		Boolean result = dao.addSymbol(stock);
-		
-		return result;
+		if(result){
+			StockPriceHistoryObject obj = new StockPriceHistoryObject();
+			obj.setLastTradePrice(stock.getPrice());
+			obj.setLastUpdateTime(new Date());
+			obj.setStockId(stock);
+			return dao.addPriceHistoryRecord(obj);
+		}
+		return false;
 	}
 
 	public Boolean deleteSymbol(String symbol) {
 		return dao.deleteSymbol(symbol);
 	}
+
+	public List<StockObject> getAllCompanies() {
+		return dao.getAllCompanies();
+	}
+	
+	@Transactional
+	@Scheduled(fixedRate = 300000)
+    public void UpdateStockHistoryPriceRecord() throws Exception {
+		
+		List<StockObject> companies = getAllCompanies();
+		for (StockObject company : companies) {
+			try {
+				Stock stockFromYahoo = YahooFinance.get(company.getSymbol());
+				BigDecimal price = stockFromYahoo.getQuote().getPrice();
+				company.setPrice(price);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			StockPriceHistoryObject obj = new StockPriceHistoryObject();
+			obj.setLastTradePrice(company.getPrice());
+			obj.setLastUpdateTime(new Date());
+			obj.setStockId(company);
+			dao.addPriceHistoryRecord(obj);
+			List<StockPriceHistoryObject> recs = company.getPriceHistoryRecords();
+			recs.add(obj);
+			
+			dao.updateSymbol(company);
+		}
+
+    }
 
 }

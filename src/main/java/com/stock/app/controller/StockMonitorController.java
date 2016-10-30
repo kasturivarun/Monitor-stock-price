@@ -41,5 +41,9 @@ public class StockMonitorController {
         return service.deleteSymbol(symbol);
     }
 	
+	@RequestMapping("/getAllCompanies")
+    public List<StockObject> getAllCompanies() throws SQLException {
+        return service.getAllCompanies();
+    }	
 	
 }

@@ -46,6 +46,9 @@ public class StockObject {
 	@Column
 	private BigDecimal price;
 	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "stockId", orphanRemoval = true)
+    @JsonManagedReference
+    private List<StockPriceHistoryObject> priceHistoryRecords = new ArrayList<StockPriceHistoryObject>(0);
 	
 	public BigDecimal getPrice() {
 		return price;
@@ -58,5 +61,12 @@ public class StockObject {
 	}
 	public void setSymbol(String companyName) {
 		this.symbol = companyName;
+	}
+	public List<StockPriceHistoryObject> getPriceHistoryRecords() {
+		return priceHistoryRecords;
+	}
+	public void setPriceHistoryRecords(
+			List<StockPriceHistoryObject> priceHistoryRecords) {
+		this.priceHistoryRecords = priceHistoryRecords;
 	}
 }
