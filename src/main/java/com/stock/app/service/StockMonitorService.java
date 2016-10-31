@@ -32,8 +32,10 @@ public class StockMonitorService {
 	@Autowired
 	StockMonitorDao dao;
 	
+	
 	public StockObject getSymbol(String symbol){
-		return dao.getSymbol(symbol);
+		StockObject newStock = dao.getSymbol(symbol);
+		return newStock;
 	}
 
 	public Boolean addSymbol(String symbol) {
@@ -69,7 +71,7 @@ public class StockMonitorService {
 	}
 	
 	@Transactional
-	@Scheduled(fixedRate = 300000)
+	//@Scheduled(fixedRate = 50000)
     public void UpdateStockHistoryPriceRecord() throws Exception {
 		
 		List<StockObject> companies = getAllCompanies();

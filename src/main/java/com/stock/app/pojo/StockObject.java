@@ -43,6 +43,12 @@ public class StockObject {
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
+	public long getStockId() {
+		return stockId;
+	}
+	public void setStockId(long stockId) {
+		this.stockId = stockId;
+	}
 	@Column
 	private BigDecimal price;
 	
@@ -65,8 +71,7 @@ public class StockObject {
 	public List<StockPriceHistoryObject> getPriceHistoryRecords() {
 		return priceHistoryRecords;
 	}
-	public void setPriceHistoryRecords(
-			List<StockPriceHistoryObject> priceHistoryRecords) {
+	public void setPriceHistoryRecords(List<StockPriceHistoryObject> priceHistoryRecords) {
 		this.priceHistoryRecords = priceHistoryRecords;
 	}
 }

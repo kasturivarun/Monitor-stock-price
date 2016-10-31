@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stock.app.pojo.StockObject;
+import com.stock.app.pojo.StockPriceHistoryObject;
 import com.stock.app.service.StockMonitorService;
 
 /**
@@ -27,8 +28,9 @@ public class StockMonitorController {
 	StockMonitorService service;
 	
 	@RequestMapping("/getStock")
-    public StockObject getSymbol(@RequestParam(value="symbol") String symbol) throws SQLException {
-        return service.getSymbol(symbol);
+    public List<StockPriceHistoryObject> getSymbol(@RequestParam(value="symbol") String symbol) throws SQLException {
+		List<StockPriceHistoryObject> list = service.getSymbol(symbol).getPriceHistoryRecords();
+        return list;
     }
 	
 	@RequestMapping("/addCompany")

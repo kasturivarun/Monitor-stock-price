@@ -41,7 +41,6 @@ public class StockMonitorDao {
 	
 	public StockObject getSymbol(String symbol){
 		StockObject st = stockRepository.findBySymbol(symbol);
-		st.getPriceHistoryRecords();
 		return st;
 	}
 
