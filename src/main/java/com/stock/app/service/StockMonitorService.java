@@ -45,6 +45,9 @@ public class StockMonitorService {
 		try {
 			Stock stockFromYahoo = YahooFinance.get(symbol);
 			BigDecimal price = stockFromYahoo.getQuote().getPrice();
+			if(price == null){
+				return false;
+			}
 			stock.setPrice(price);
 			stock.setCompanyName(stockFromYahoo.getName());
 		} catch (IOException e) {
