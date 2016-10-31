@@ -74,7 +74,7 @@ public class StockMonitorService {
 	}
 	
 	@Transactional
-	//@Scheduled(fixedRate = 50000)
+	@Scheduled(fixedRate = 300000)
     public void UpdateStockHistoryPriceRecord() throws Exception {
 		
 		List<StockObject> companies = getAllCompanies();

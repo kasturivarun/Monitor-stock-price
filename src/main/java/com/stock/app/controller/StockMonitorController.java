@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,23 +28,23 @@ public class StockMonitorController {
 	@Autowired
 	StockMonitorService service;
 	
-	@RequestMapping("/getCompany")
+	@RequestMapping(value= "/getCompany", method = RequestMethod.GET)
     public List<StockPriceHistoryObject> getSymbol(@RequestParam(value="symbol") String symbol) throws SQLException {
 		List<StockPriceHistoryObject> list = service.getSymbol(symbol).getPriceHistoryRecords();
         return list;
     }
 	
-	@RequestMapping("/addCompany")
+	@RequestMapping(value= "/addCompany", method = RequestMethod.POST)
     public Boolean addSymbol(@RequestParam(value="symbol") String symbol) throws SQLException {
         return service.addSymbol(symbol);
     }
 	
-	@RequestMapping("/deleteCompany")
+	@RequestMapping(value= "/deleteCompany", method = RequestMethod.DELETE)
     public Boolean deleteSymbol(@RequestParam(value="symbol") String symbol) throws SQLException {
         return service.deleteSymbol(symbol);
     }
 	
-	@RequestMapping("/getAllCompanies")
+	@RequestMapping(value= "/getAllCompanies", method = RequestMethod.GET)
     public List<StockObject> getAllCompanies() throws SQLException {
         return service.getAllCompanies();
     }	
