@@ -27,7 +27,7 @@ public class StockMonitorController {
 	@Autowired
 	StockMonitorService service;
 	
-	@RequestMapping("/getStock")
+	@RequestMapping("/getCompany")
     public List<StockPriceHistoryObject> getSymbol(@RequestParam(value="symbol") String symbol) throws SQLException {
 		List<StockPriceHistoryObject> list = service.getSymbol(symbol).getPriceHistoryRecords();
         return list;
