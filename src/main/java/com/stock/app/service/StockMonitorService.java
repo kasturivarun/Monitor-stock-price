@@ -44,10 +44,13 @@ public class StockMonitorService {
 		
 		try {
 			Stock stockFromYahoo = YahooFinance.get(symbol);
+			
 			BigDecimal price = stockFromYahoo.getQuote().getPrice();
-			if(price == null){
+			
+			if(price == null) {
 				return false;
 			}
+			
 			stock.setPrice(price);
 			stock.setCompanyName(stockFromYahoo.getName());
 		} catch (IOException e) {
@@ -55,6 +58,7 @@ public class StockMonitorService {
 		}
 		
 		Boolean result = dao.addSymbol(stock);
+		System.out.println(result);
 		if(result){
 			StockPriceHistoryObject obj = new StockPriceHistoryObject();
 			obj.setLastTradePrice(stock.getPrice());
@@ -74,8 +78,8 @@ public class StockMonitorService {
 	}
 	
 	@Transactional
-	@Scheduled(fixedRate = 300000)
-    public void UpdateStockHistoryPriceRecord() throws Exception {
+	@Scheduled(fixedRate = 400000)
+    public void updateStockHistoryPriceRecord() throws Exception {
 		
 		List<StockObject> companies = getAllCompanies();
 		for (StockObject company : companies) {
@@ -98,5 +102,14 @@ public class StockMonitorService {
 		}
 
     }
+
+	public StockMonitorDao getDao() {
+		return dao;
+	}
+
+	public void setDao(StockMonitorDao dao) {
+		this.dao = dao;
+	}
+
 
 }

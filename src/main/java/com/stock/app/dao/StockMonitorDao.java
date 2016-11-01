@@ -25,9 +25,6 @@ import com.stock.app.pojo.StockPriceHistoryObject;
  */
 @Service
 public class StockMonitorDao {
-
-	
-	
 	
 	private StockRepository stockRepository;
 	
