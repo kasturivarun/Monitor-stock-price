@@ -80,9 +80,8 @@ public class StockMonitorDao {
 		}
 	}
 	
-	public Boolean addPriceHistoryRecord(StockPriceHistoryObject obj){
+	public void addPriceHistoryRecord(StockPriceHistoryObject obj){
 		stockHistoryRepository.save(obj);
-		return true;
 	}
 
 	public List<StockObject> getAllCompanies() {

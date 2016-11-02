@@ -64,7 +64,8 @@ public class StockMonitorService {
 			obj.setLastTradePrice(stock.getPrice());
 			obj.setLastUpdateTime(new Date());
 			obj.setStockId(stock);
-			return dao.addPriceHistoryRecord(obj);
+			dao.addPriceHistoryRecord(obj);
+			return true;
 		}
 		return false;
 	}
