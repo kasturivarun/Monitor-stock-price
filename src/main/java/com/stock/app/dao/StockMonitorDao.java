@@ -3,18 +3,14 @@
  */
 package com.stock.app.dao;
 
-import java.io.IOException;
-import java.math.BigDecimal;
+
 import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import yahoofinance.Stock;
-import yahoofinance.YahooFinance;
 
 import com.stock.app.pojo.StockObject;
 import com.stock.app.pojo.StockPriceHistoryObject;
