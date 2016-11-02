@@ -16,7 +16,8 @@ import org.springframework.stereotype.Service;
 
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.stock.app.dao.StockMonitorDao;
 import com.stock.app.pojo.StockObject;
 import com.stock.app.pojo.StockPriceHistoryObject;
@@ -30,15 +31,17 @@ public class StockMonitorService {
 	
 	@Autowired
 	StockMonitorDao dao;
-	
+	private static final Logger log = LoggerFactory.getLogger(StockMonitorService.class);
 	
 	public StockObject getSymbol(String symbol){
+		log.info("Getting stock record {}", symbol);
 		StockObject newStock = dao.getSymbol(symbol);
 		return newStock;
 	}
 
 	public Boolean addSymbol(String symbol) {
 		StockObject stock = new StockObject();
+		log.info("Adding stock record {}", symbol);
 		stock.setSymbol(symbol);
 		
 		try {
@@ -70,17 +73,19 @@ public class StockMonitorService {
 	}
 
 	public Boolean deleteSymbol(String symbol) {
+		log.info("Deleting stock record {}", symbol);
 		return dao.deleteSymbol(symbol);
 	}
 
 	public List<StockObject> getAllCompanies() {
+		log.info("Getting all companies details");
 		return dao.getAllCompanies();
 	}
 	
 	@Transactional
 	@Scheduled(fixedRate = 300000)
     public void updateStockHistoryPriceRecord() throws Exception {
-		
+		log.info("Running Cron job and updating database tables");
 		List<StockObject> companies = getAllCompanies();
 		for (StockObject company : companies) {
 			try {
