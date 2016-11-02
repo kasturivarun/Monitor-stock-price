@@ -5,7 +5,6 @@ package com.stock.app.service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -79,7 +78,7 @@ public class StockMonitorService {
 	}
 	
 	@Transactional
-	@Scheduled(fixedRate = 400000)
+	@Scheduled(fixedRate = 300000)
     public void updateStockHistoryPriceRecord() throws Exception {
 		
 		List<StockObject> companies = getAllCompanies();
