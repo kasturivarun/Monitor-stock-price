@@ -1,0 +1,9 @@
+com\stock\app\controller\StockMonitorController.class
+com\stock\app\pojo\JsonDateSerializer.class
+com\stock\app\pojo\StockObject.class
+com\stock\app\service\StockMonitorService.class
+com\stock\app\dao\StockMonitorDao.class
+com\stock\app\dao\StockRepository.class
+com\stock\app\pojo\StockPriceHistoryObject.class
+com\stock\app\Application.class
+com\stock\app\dao\StockHistoryRepository.class
