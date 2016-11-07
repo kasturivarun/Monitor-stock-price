@@ -60,16 +60,19 @@ Monitor Stock Price is an application to monitor the changes and trend in the st
 >spring.datasource.username={username}
   
 >spring.datasource.password={password}
-  
-	Now, the perquisites are finished.
+
+Now, the perquisites are finished.
   
 5)	Open command and traverse to project folder.
 
 6)	Type the follwoing command 
+
 >$mvn clean package
+
 This command will create a jar in target folder in project folder.
 
-7)	Traverse to the jar folder and type the following command 
+7)	Traverse to the jar folder and type the following command
+
 >$java –jar {JAR NAME}.jar.
 
 8)	This command will start the server now and you can access the rest API from the browser.
